@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedSecure - Онлайн страхование</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Плавный скролл */
+        html {
+            scroll-behavior: smooth;
+        }
+        /* Стили для кастомного файлового инпута */
+        .file-input-label {
+            transition: all 0.2s ease-in-out;
+        }
+        .file-input-label:hover {
+            background-color: #e0f2fe; /* light sky-100 */
+        }
+        /* Стили для активной кнопки языка */
+        .lang-btn.active {
+            background-color: #0284c7; /* sky-600 */
+            color: white;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Шапка сайта -->
+    <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-20">
+                <a href="#" class="flex items-center space-x-2">
+                    <svg class="w-8 h-8 text-sky-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.286zm0 13.036h.008v.008h-.008v-.008z" />
+                    </svg>
+                    <span class="text-2xl font-bold text-gray-800">Med<span class="text-sky-600">Secure</span></span>
+                </a>
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#packages" class="text-gray-600 hover:text-sky-600 transition duration-300" data-lang="nav_packages">Страховые пакеты</a>
+                    <a href="#calculator" class="text-gray-600 hover:text-sky-600 transition duration-300" data-lang="nav_calculator">Калькулятор</a>
+                    <a href="#about" class="text-gray-600 hover:text-sky-600 transition duration-300" data-lang="nav_about">О нас</a>
+                    <a href="#faq" class="text-gray-600 hover:text-sky-600 transition duration-300" data-lang="nav_faq">FAQ</a>
+                </nav>
+                <div class="flex items-center space-x-4">
+                     <div class="bg-gray-200 rounded-full p-0.5 flex text-sm">
+                        <button id="lang-ru" class="lang-btn active px-3 py-1 rounded-full" onclick="setLanguage('ru')">RU</button>
+                        <button id="lang-uz" class="lang-btn px-3 py-1 rounded-full" onclick="setLanguage('uz')">UZ</button>
+                    </div>
+                    <a href="#application-form" class="hidden sm:inline-block bg-sky-600 text-white px-5 py-2 rounded-lg font-semibold hover:bg-sky-700 transition duration-300 shadow-md" data-lang="nav_apply">Оформить полис</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Основной контент -->
+    <main>
+        <!-- Главный экран -->
+        <section class="bg-white">
+            <div class="container mx-auto px-4 py-20 md:py-32 text-center">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4 text-gray-900" data-lang="hero_title">Медицинская страховка онлайн</h1>
+                <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-8" data-lang="hero_subtitle">Надежная защита вашего здоровья. Оформите полис за 5 минут, не выходя из дома.</p>
+                <a href="#application-form" class="bg-sky-600 text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-sky-700 transition duration-300 shadow-lg">
+                    <span data-lang="hero_button">Подать заявку</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Пакеты страхования -->
+        <section id="packages" class="py-20">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12" data-lang="packages_title">Выберите свой план страхования</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Пакет 1 -->
+                    <div class="bg-white rounded-xl shadow-lg p-8 transform hover:-translate-y-2 transition-transform duration-300 flex flex-col">
+                        <h3 class="text-2xl font-bold mb-4 text-sky-600" data-lang="package1_title">Стандарт</h3>
+                        <p class="text-gray-600 mb-6 flex-grow" data-lang="package1_desc">Базовое покрытие для неотложных случаев и консультаций у терапевта.</p>
+                        <ul class="space-y-3 mb-8 text-gray-700">
+                            <li class="flex items-center"><svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span data-lang="package1_feat1">Экстренная помощь</span></li>
+                            <li class="flex items-center"><svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span data-lang="package1_feat2">Прием терапевта</span></li>
+                            <li class="flex items-center"><svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span data-lang="package1_feat3">Базовые анализы</span></li>
+                        </ul>
+                        <a href="#application-form" class="mt-auto w-full text-center bg-sky-100 text-sky-700 font-bold py-3 px-6 rounded-lg hover:bg-sky-200 transition" data-lang="btn_choose">Выбрать</a>
+                    </div>
+                    <!-- Пакет 2 -->
+                    <div class="bg-white rounded-xl shadow-lg p-8 border-2 border-sky-600 transform hover:-translate-y-2 transition-transform duration-300 flex flex-col">
+                        <span class="bg-sky-600 text-white text-xs font-bold px-3 py-1 rounded-full absolute -top-4" data-lang="popular">ПОПУЛЯРНЫЙ</span>
+                        <h3 class="text-2xl font-bold mb-4 text-sky-600" data-lang="package2_title">Оптима</h3>
+                        <p class="text-gray-600 mb-6 flex-grow" data-lang="package2_desc">Расширенное покрытие, включающее специалистов и диагностику.</p>
+                        <ul class="space-y-3 mb-8 text-gray-700">
+                           <li class="flex items-center"><svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span data-lang="package2_feat1">Все из "Стандарт"</span></li>
+                           <li class="flex items-center"><svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span data-lang="package2_feat2">Врачи-специалисты</span></li>
+                           <li class="flex items-center"><svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span data-lang="package2_feat3">УЗИ и рентген</span></li>
+                        </ul>
+                        <a href="#application-form" class="mt-auto w-full text-center bg-sky-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-sky-700 transition" data-lang="btn_choose">Выбрать</a>
+                    </div>
+                    <!-- Пакет 3 -->
+                    <div class="bg-white rounded-xl shadow-lg p-8 transform hover:-translate-y-2 transition-transform duration-300 flex flex-col">
+                        <h3 class="text-2xl font-bold mb-4 text-sky-600" data-lang="package3_title">Премиум</h3>
+                        <p class="text-gray-600 mb-6 flex-grow" data-lang="package3_desc">Полное покрытие, включая стоматологию и плановую госпитализацию.</p>
+                        <ul class="space-y-3 mb-8 text-gray-700">
+                           <li class="flex items-center"><svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span data-lang="package3_feat1">Все из "Оптима"</span></li>
+                           <li class="flex items-center"><svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span data-lang="package3_feat2">Стоматология</span></li>
+                           <li class="flex items-center"><svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span data-lang="package3_feat3">Госпитализация</span></li>
+                        </ul>
+                        <a href="#application-form" class="mt-auto w-full text-center bg-sky-100 text-sky-700 font-bold py-3 px-6 rounded-lg hover:bg-sky-200 transition" data-lang="btn_choose">Выбрать</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Калькулятор -->
+        <section id="calculator" class="py-20 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-4" data-lang="calculator_title">Калькулятор стоимости</h2>
+                <p class="text-gray-600 text-center max-w-2xl mx-auto mb-12" data-lang="calculator_subtitle">Рассчитайте примерную стоимость вашего страхового полиса онлайн.</p>
+                <div class="max-w-2xl mx-auto bg-gray-50 p-8 rounded-xl shadow-md">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="calc-age" class="font-semibold text-gray-700 block mb-2" data-lang="form_age">Ваш возраст</label>
+                            <input type="number" id="calc-age" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500" placeholder="30">
+                        </div>
+                        <div>
+                            <label for="calc-duration" class="font-semibold text-gray-700 block mb-2" data-lang="form_duration">Срок страховки (мес.)</label>
+                            <select id="calc-duration" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 bg-white">
+                                <option value="6">6</option>
+                                <option value="12" selected>12</option>
+                                <option value="24">24</option>
+                            </select>
+                        </div>
+                        <div class="md:col-span-2">
+                             <label for="calc-package" class="font-semibold text-gray-700 block mb-2" data-lang="form_package_type">Тип пакета</label>
+                             <select id="calc-package" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 bg-white">
+                                <option value="standard" data-lang-opt="package_standard">Стандарт</option>
+                                <option value="optima" selected data-lang-opt="package_optima">Оптима</option>
+                                <option value="premium" data-lang-opt="package_premium">Премиум</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button id="calculate-btn" class="w-full bg-green-600 text-white font-bold py-4 px-6 rounded-lg mt-8 hover:bg-green-700 transition" data-lang="btn_calculate">Рассчитать</button>
+                    <div id="calculator-result" class="mt-8 text-center hidden">
+                        <p class="text-gray-600" data-lang="calculator_result_label">Примерная стоимость:</p>
+                        <p class="text-4xl font-bold text-sky-600"><span id="result-amount"></span> <span data-lang="currency_sum">сум</span></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Форма заявки -->
+        <section id="application-form" class="py-20">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12" data-lang="form_title">Онлайн-заявка на страховку</h2>
+                <form id="main-form" class="max-w-3xl mx-auto bg-white p-8 rounded-xl shadow-lg">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="md:col-span-2">
+                            <label for="name" class="font-semibold text-gray-700 block mb-2" data-lang="form_name">ФИО</label>
+                            <input type="text" id="name" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500" required>
+                        </div>
+                        <div>
+                            <label for="age" class="font-semibold text-gray-700 block mb-2" data-lang="form_age">Возраст</label>
+                            <input type="number" id="age" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500" required>
+                        </div>
+                        <div>
+                            <label for="phone" class="font-semibold text-gray-700 block mb-2" data-lang="form_phone">Номер телефона</label>
+                            <input type="tel" id="phone" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500" placeholder="+998 XX XXX-XX-XX" required>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label for="package-type" class="font-semibold text-gray-700 block mb-2" data-lang="form_package_type">Вид страховки</label>
+                            <select id="package-type" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 bg-white">
+                                <option value="standard" data-lang-opt="package_standard">Стандарт</option>
+                                <option value="optima" data-lang-opt="package_optima">Оптима</option>
+                                <option value="premium" data-lang-opt="package_premium">Премиум</option>
+                            </select>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="font-semibold text-gray-700 block mb-2" data-lang="form_docs">Прикрепите документы</label>
+                            <label for="documents" class="file-input-label flex items-center justify-center w-full p-6 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer">
+                                <div class="text-center">
+                                    <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true"><path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                                    <p class="mt-2 text-sm text-gray-600"><span class="font-semibold text-sky-600" data-lang="form_upload_btn">Нажмите для загрузки</span> <span data-lang="form_upload_text">или перетащите</span></p>
+                                    <p id="file-name" class="mt-1 text-xs text-gray-500"></p>
+                                </div>
+                                <input id="documents" name="documents" type="file" class="sr-only">
+                            </label>
+                        </div>
+                    </div>
+                    <button type="submit" class="w-full bg-sky-600 text-white font-bold py-4 px-6 rounded-lg mt-8 hover:bg-sky-700 transition" data-lang="btn_submit_application">Отправить заявку</button>
+                </form>
+            </div>
+        </section>
+        
+        <!-- О нас -->
+        <section id="about" class="py-20 bg-white">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6" data-lang="about_title">О нашей компании</h2>
+                <p class="max-w-3xl mx-auto text-gray-600" data-lang="about_text">Мы — команда профессионалов, которая заботится о вашем здоровье. Наша миссия — сделать медицинское страхование доступным, понятным и удобным для каждого. Мы используем современные технологии, чтобы вы могли получить надежную защиту в несколько кликов.</p>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section id="faq" class="py-20">
+            <div class="container mx-auto px-4 max-w-4xl">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12" data-lang="faq_title">Часто задаваемые вопросы</h2>
+                <div class="space-y-4">
+                    <!-- Вопрос 1 -->
+                    <div class="bg-white rounded-lg shadow-sm">
+                        <button class="faq-question w-full flex justify-between items-center text-left p-5 font-semibold">
+                            <span data-lang="faq1_q">Какие документы нужны для оформления?</span>
+                            <svg class="w-6 h-6 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="faq-answer hidden p-5 pt-0 text-gray-600">
+                            <p data-lang="faq1_a">Для оформления полиса вам понадобится только фотография вашего паспорта. Вы можете прикрепить ее в онлайн-форме заявки.</p>
+                        </div>
+                    </div>
+                    <!-- Вопрос 2 -->
+                    <div class="bg-white rounded-lg shadow-sm">
+                        <button class="faq-question w-full flex justify-between items-center text-left p-5 font-semibold">
+                            <span data-lang="faq2_q">Как быстро я получу полис?</span>
+                            <svg class="w-6 h-6 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="faq-answer hidden p-5 pt-0 text-gray-600">
+                            <p data-lang="faq2_a">После одобрения заявки (обычно в течение 1-2 часов в рабочее время) электронный полис будет отправлен вам на указанный номер в Telegram.</p>
+                        </div>
+                    </div>
+                    <!-- Вопрос 3 -->
+                    <div class="bg-white rounded-lg shadow-sm">
+                        <button class="faq-question w-full flex justify-between items-center text-left p-5 font-semibold">
+                            <span data-lang="faq3_q">Что делать при наступлении страхового случая?</span>
+                            <svg class="w-6 h-6 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="faq-answer hidden p-5 pt-0 text-gray-600">
+                            <p data-lang="faq3_a">Вам необходимо связаться с нашим круглосуточным колл-центром по номеру, указанному в полисе. Оператор проконсультирует вас и направит в ближайшую клинику-партнера.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Подвал -->
+    <footer class="bg-gray-800 text-white">
+        <div class="container mx-auto px-4 py-12 text-center">
+            <p>&copy; 2025 MedSecure. <span data-lang="footer_rights">Все права защищены.</span></p>
+            <p class="text-sm text-gray-400 mt-2" data-lang="footer_disclaimer">Данный сайт является демонстрационным макетом.</p>
+        </div>
+    </footer>
+    
+    <!-- Модальное окно для уведомлений -->
+    <div id="notification-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="bg-white rounded-lg shadow-xl p-8 text-center max-w-sm mx-4">
+            <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100 mb-4">
+                <svg class="h-6 w-6 text-green-600" stroke="currentColor" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            </div>
+            <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title" data-lang="modal_title">Заявка успешно отправлена!</h3>
+            <div class="mt-2">
+                <p class="text-sm text-gray-500" id="modal-text" data-lang="modal_text">Мы свяжемся с вами в ближайшее время. Уведомление о статусе заявки придет в Telegram.</p>
+            </div>
+            <div class="mt-4">
+                <button type="button" id="modal-close-btn" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-sky-600 text-base font-medium text-white hover:bg-sky-700" data-lang="modal_close">Отлично</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        // --- Словарь для мультиязычности ---
+        const translations = {
+            ru: {
+                nav_packages: 'Страховые пакеты',
+                nav_calculator: 'Калькулятор',
+                nav_about: 'О нас',
+                nav_faq: 'FAQ',
+                nav_apply: 'Оформить полис',
+                hero_title: 'Медицинская страховка онлайн',
+                hero_subtitle: 'Надежная защита вашего здоровья. Оформите полис за 5 минут, не выходя из дома.',
+                hero_button: 'Подать заявку',
+                packages_title: 'Выберите свой план страхования',
+                package1_title: 'Стандарт',
+                package1_desc: 'Базовое покрытие для неотложных случаев и консультаций у терапевта.',
+                package1_feat1: 'Экстренная помощь',
+                package1_feat2: 'Прием терапевта',
+                package1_feat3: 'Базовые анализы',
+                package2_title: 'Оптима',
+                package2_desc: 'Расширенное покрытие, включающее специалистов и диагностику.',
+                package2_feat1: 'Все из "Стандарт"',
+                package2_feat2: 'Врачи-специалисты',
+                package2_feat3: 'УЗИ и рентген',
+                package3_title: 'Премиум',
+                package3_desc: 'Полное покрытие, включая стоматологию и плановую госпитализацию.',
+                package3_feat1: 'Все из "Оптима"',
+                package3_feat2: 'Стоматология',
+                package3_feat3: 'Госпитализация',
+                popular: 'ПОПУЛЯРНЫЙ',
+                btn_choose: 'Выбрать',
+                calculator_title: 'Калькулятор стоимости',
+                calculator_subtitle: 'Рассчитайте примерную стоимость вашего страхового полиса онлайн.',
+                form_age: 'Ваш возраст',
+                form_duration: 'Срок страховки (мес.)',
+                form_package_type: 'Тип пакета',
+                btn_calculate: 'Рассчитать',
+                calculator_result_label: 'Примерная стоимость:',
+                currency_sum: 'сум',
+                form_title: 'Онлайн-заявка на страховку',
+                form_name: 'ФИО',
+                form_phone: 'Номер телефона',
+                form_docs: 'Прикрепите документы',
+                form_upload_btn: 'Нажмите для загрузки',
+                form_upload_text: 'или перетащите',
+                btn_submit_application: 'Отправить заявку',
+                about_title: 'О нашей компании',
+                about_text: 'Мы — команда профессионалов, которая заботится о вашем здоровье. Наша миссия — сделать медицинское страхование доступным, понятным и удобным для каждого. Мы используем современные технологии, чтобы вы могли получить надежную защиту в несколько кликов.',
+                faq_title: 'Часто задаваемые вопросы',
+                faq1_q: 'Какие документы нужны для оформления?',
+                faq1_a: 'Для оформления полиса вам понадобится только фотография вашего паспорта. Вы можете прикрепить ее в онлайн-форме заявки.',
+                faq2_q: 'Как быстро я получу полис?',
+                faq2_a: 'После одобрения заявки (обычно в течение 1-2 часов в рабочее время) электронный полис будет отправлен вам на указанный номер в Telegram.',
+                faq3_q: 'Что делать при наступлении страхового случая?',
+                faq3_a: 'Вам необходимо связаться с нашим круглосуточным колл-центром по номеру, указанному в полисе. Оператор проконсультирует вас и направит в ближайшую клинику-партнера.',
+                footer_rights: 'Все права защищены.',
+                footer_disclaimer: 'Данный сайт является демонстрационным макетом.',
+                modal_title: 'Заявка успешно отправлена!',
+                modal_text: 'Мы свяжемся с вами в ближайшее время. Уведомление о статусе заявки придет в Telegram.',
+                modal_close: 'Отлично',
+                package_standard: 'Стандарт',
+                package_optima: 'Оптима',
+                package_premium: 'Премиум',
+            },
+            uz: {
+                nav_packages: 'Sug\'urta paketlari',
+                nav_calculator: 'Kalkulyator',
+                nav_about: 'Biz haqimizda',
+                nav_faq: 'FAQ',
+                nav_apply: 'Polisni rasmiylashtirish',
+                hero_title: 'Onlayn tibbiy sug\'urta',
+                hero_subtitle: 'Sog\'lig\'ingizning ishonchli himoyasi. Uydan chiqmasdan 5 daqiqada polisni rasmiylashtiring.',
+                hero_button: 'Ariza yuborish',
+                packages_title: 'O\'zingizning sug\'urta rejangizni tanlang',
+                package1_title: 'Standart',
+                package1_desc: 'Shoshilinch holatlar va terapevt maslahatlari uchun asosiy qoplama.',
+                package1_feat1: 'Shoshilinch yordam',
+                package1_feat2: 'Terapevt qabuli',
+                package1_feat3: 'Asosiy tahlillar',
+                package2_title: 'Optimal',
+                package2_desc: 'Mutaxassislar va diagnostikani o\'z ichiga olgan kengaytirilgan qoplama.',
+                package2_feat1: '"Standart"dagi hamma narsa',
+                package2_feat2: 'Mutaxassis shifokorlar',
+                package2_feat3: 'UZI va rentgen',
+                package3_title: 'Premium',
+                package3_desc: 'Stomatologiya va rejali kasalxonaga yotqizishni o\'z ichiga olgan to\'liq qoplama.',
+                package3_feat1: '"Optimal"dagi hamma narsa',
+                package3_feat2: 'Stomatologiya',
+                package3_feat3: 'Kasalxonaga yotqizish',
+                popular: 'OMMABOP',
+                btn_choose: 'Tanlash',
+                calculator_title: 'Narx kalkulyatori',
+                calculator_subtitle: 'Sug\'urta polisingizning taxminiy narxini onlayn hisoblang.',
+                form_age: 'Yoshingiz',
+                form_duration: 'Sug\'urta muddati (oy)',
+                form_package_type: 'Paket turi',
+                btn_calculate: 'Hisoblash',
+                calculator_result_label: 'Taxminiy narx:',
+                currency_sum: 'so\'m',
+                form_title: 'Sug\'urtaga onlayn ariza',
+                form_name: 'F.I.Sh.',
+                form_phone: 'Telefon raqami',
+                form_docs: 'Hujjatlarni biriktiring',
+                form_upload_btn: 'Yuklash uchun bosing',
+                form_upload_text: 'yoki sudrab olib keling',
+                btn_submit_application: 'Ariza yuborish',
+                about_title: 'Kompaniyamiz haqida',
+                about_text: 'Biz sizning sog\'lig\'ingiz haqida qayg\'uradigan professionallar jamoasimiz. Bizning vazifamiz tibbiy sug\'urtani hamma uchun ochiq, tushunarli va qulay qilishdir. Bir necha marta bosish orqali ishonchli himoyaga ega bo\'lishingiz uchun biz zamonaviy texnologiyalardan foydalanamiz.',
+                faq_title: 'Ko\'p beriladigan savollar',
+                faq1_q: 'Rasmiylashtirish uchun qanday hujjatlar kerak?',
+                faq1_a: 'Polisni rasmiylashtirish uchun sizga faqat pasportingizning surati kerak bo\'ladi. Uni onlayn ariza shakliga biriktirishingiz mumkin.',
+                faq2_q: 'Polisni qanchalik tez olaman?',
+                faq2_a: 'Ariza ma\'qullangandan so\'ng (odatda ish vaqtida 1-2 soat ichida) elektron polis sizga ko\'rsatilgan Telegram raqamiga yuboriladi.',
+                faq3_q: 'Sug\'urta hodisasi yuz berganda nima qilish kerak?',
+                faq3_a: 'Siz polisda ko\'rsatilgan bizning kecha-yu kunduz ishlaydigan koll-markazimizga murojaat qilishingiz kerak. Operator sizga maslahat beradi va sizni eng yaqin hamkor klinikaga yo\'naltiradi.',
+                footer_rights: 'Barcha huquqlar himoyalangan.',
+                footer_disclaimer: 'Ushbu sayt namoyish maketi hisoblanadi.',
+                modal_title: 'Ariza muvaffaqiyatli yuborildi!',
+                modal_text: 'Tez orada siz bilan bog\'lanamiz. Ariza holati haqida bildirishnoma Telegram\'ga keladi.',
+                modal_close: 'Ajoyib',
+                package_standard: 'Standart',
+                package_optima: 'Optimal',
+                package_premium: 'Premium',
+            }
+        };
+
+        // --- Логика переключения языка ---
+        function setLanguage(lang) {
+            document.documentElement.lang = lang;
+            const elements = document.querySelectorAll('[data-lang]');
+            elements.forEach(el => {
+                const key = el.getAttribute('data-lang');
+                if (translations[lang][key]) {
+                    el.textContent = translations[lang][key];
+                }
+            });
+
+            const optElements = document.querySelectorAll('[data-lang-opt]');
+            optElements.forEach(el => {
+                const key = el.getAttribute('data-lang-opt');
+                if (translations[lang][key]) {
+                    el.textContent = translations[lang][key];
+                }
+            });
+            
+            // Обновляем активную кнопку
+            document.getElementById('lang-ru').classList.toggle('active', lang === 'ru');
+            document.getElementById('lang-uz').classList.toggle('active', lang === 'uz');
+        }
+
+        // --- Логика калькулятора ---
+        const calculateBtn = document.getElementById('calculate-btn');
+        calculateBtn.addEventListener('click', () => {
+            const age = parseInt(document.getElementById('calc-age').value) || 30;
+            const duration = parseInt(document.getElementById('calc-duration').value);
+            const packageType = document.getElementById('calc-package').value;
+
+            let basePrice = 0;
+            switch (packageType) {
+                case 'standard': basePrice = 500000; break;
+                case 'optima': basePrice = 1200000; break;
+                case 'premium': basePrice = 2500000; break;
+            }
+
+            let ageFactor = 1;
+            if (age > 40) ageFactor = 1.2;
+            if (age > 60) ageFactor = 1.5;
+
+            const durationFactor = duration / 12;
+
+            const finalPrice = basePrice * ageFactor * durationFactor;
+            
+            const resultAmountEl = document.getElementById('result-amount');
+            resultAmountEl.textContent = Math.round(finalPrice).toLocaleString('ru-RU');
+            
+            document.getElementById('calculator-result').classList.remove('hidden');
+        });
+
+        // --- Логика FAQ аккордеона ---
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const icon = question.querySelector('svg');
+                
+                answer.classList.toggle('hidden');
+                icon.classList.toggle('rotate-180');
+            });
+        });
+
+        // --- Логика формы и модального окна ---
+        const mainForm = document.getElementById('main-form');
+        const modal = document.getElementById('notification-modal');
+        const modalCloseBtn = document.getElementById('modal-close-btn');
+
+        mainForm.addEventListener('submit', (e) => {
+            e.preventDefault(); // Предотвращаем реальную отправку формы
+            modal.classList.remove('hidden');
+        });
+
+        modalCloseBtn.addEventListener('click', () => {
+            modal.classList.add('hidden');
+            mainForm.reset(); // Сбрасываем поля формы
+            document.getElementById('file-name').textContent = '';
+        });
+        
+        // --- Логика для кастомного инпута файла ---
+        const fileInput = document.getElementById('documents');
+        const fileNameEl = document.getElementById('file-name');
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                fileNameEl.textContent = e.target.files[0].name;
+            } else {
+                fileNameEl.textContent = '';
+            }
+        });
+
+        // Устанавливаем язык по умолчанию при загрузке
+        setLanguage('ru');
+
+    </script>
+</body>
+</html>
